@@ -18,7 +18,7 @@ class CategoriesController extends Controller
       $categories = Categorie::paginate(15);
       return view('admin.categories.index',[
         'categories'->$categories
-      ])
+      ]);
     }
 
     /**
@@ -53,7 +53,7 @@ class CategoriesController extends Controller
       $categorie = Categorie::find($id);
       return view('admin.categories.show',[
         'categorie'->$categorie
-      ])
+      ]);
     }
 
     /**
@@ -87,6 +87,8 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $category = Product::findOrFail($id);
+      $category->delete();
+      return redirect('/categories');
     }
 }

@@ -16,9 +16,8 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::paginate(15);
-        $vac = compact("products");
         return view("website.products.index", [
-          'products'->$products
+          'products'=>$products
         ]);
     }
 
@@ -29,7 +28,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.products.create')
     }
 
     /**
@@ -40,7 +39,11 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Product::create($request->all());
+
+      //  return redirect('/products)';
+      //  return redirect()->back();
+        return redirect('/products/' . $product->id)
     }
 
     /**
@@ -53,7 +56,7 @@ class ProductsController extends Controller
     {
         $product = Product::find($id);
         return view("website.products.show", [
-          'product'->$product
+          'product'=>$product
         ]);
     }
 
@@ -65,7 +68,10 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('admin.products.edit',[
+          'product'=>$product
+        ]);
     }
 
     /**
@@ -88,6 +94,8 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product->delete();
+        return redirect('/products');
     }
 }

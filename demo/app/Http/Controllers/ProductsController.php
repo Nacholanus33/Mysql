@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Product;
+
 class ProductsController extends Controller
 {
     /**
@@ -16,7 +18,7 @@ class ProductsController extends Controller
         $products = Product::paginate(15);
         $vac = compact("products");
         return view("website.products.index", [
-          'products'->$products;
+          'products'->$products
         ]);
     }
 
@@ -50,7 +52,9 @@ class ProductsController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
-        return view("website.products.show")
+        return view("website.products.show", [
+          'product'->$product
+        ]);
     }
 
     /**

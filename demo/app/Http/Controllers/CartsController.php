@@ -52,8 +52,8 @@ class CartsController extends Controller
     {
       $cart = Cart::find($id);
       return view('admin.carts.show',[
-        'cart'->$cart
-      ])
+        'cart'=>$cart
+      ]);
     }
 
     /**
@@ -87,6 +87,8 @@ class CartsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $cart = Cart::findOrFail($id);
+        $product->delete();
+        return redirect('/cart');
     }
 }

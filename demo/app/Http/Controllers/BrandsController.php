@@ -18,7 +18,7 @@ class BrandsController extends Controller
         $brands = Brand::paginate(15);
         return view('admin.brands.index',[
           'brands'->$brands
-        ])
+        ]);
     }
 
     /**
@@ -53,7 +53,7 @@ class BrandsController extends Controller
         $brand = Brand::find($id);
         return view('admin.brands.show',[
           'brand'->$brand
-        ])
+        ]);
     }
 
     /**
@@ -87,6 +87,8 @@ class BrandsController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $brand = Product::findOrFail($id);
+      $brand->delete();
+      return redirect('/brands');
     }
 }

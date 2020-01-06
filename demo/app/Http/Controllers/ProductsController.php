@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Categorie;
+use App\Product;
 
-class CategoriesController extends Controller
+class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,10 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-      $categories = Categorie::paginate(15);
-      return view('admin.categories.index',[
-        'categories'->$categories
-      ]);
+        $products = Product::paginate(15);
+        return view("website.products.index", [
+          'products'=>$products
+        ]);
     }
 
     /**
@@ -28,7 +28,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.products.create')
     }
 
     /**
@@ -39,7 +39,11 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Product::create($request->all());
+
+      //  return redirect('/products)';
+      //  return redirect()->back();
+        return redirect('/products/' . $product->id)
     }
 
     /**
@@ -50,10 +54,10 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-      $categorie = Categorie::find($id);
-      return view('admin.categories.show',[
-        'categorie'->$categorie
-      ]);
+        $product = Product::find($id);
+        return view("website.products.show", [
+          'product'=>$product
+        ]);
     }
 
     /**
@@ -64,7 +68,10 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('admin.products.edit',[
+          'product'=>$product
+        ]);
     }
 
     /**
@@ -87,8 +94,8 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-      $category = Product::findOrFail($id);
-      $category->delete();
-      return redirect('/categories');
+        $product = Product::findOrFail($id);
+        $product->delete();
+        return redirect('/products');
     }
 }

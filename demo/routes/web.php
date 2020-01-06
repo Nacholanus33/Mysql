@@ -54,3 +54,6 @@ Route::post('/perfil', function () {
 Route::get('/admin/productos/add', function () {
     return view('produc');
 });
+Route::get('/brand', function () {
+    return view('brand');
+});

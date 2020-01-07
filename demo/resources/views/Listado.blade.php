@@ -5,6 +5,9 @@
     <title></title>
   </head>
   <body>
-    {{$brand->name}}
+<ul>
+  @includeif('view', $data)
+</ul>
+
   </body>
 </html>

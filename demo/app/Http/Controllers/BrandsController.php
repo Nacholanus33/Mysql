@@ -17,7 +17,7 @@ class BrandsController extends Controller
     {
         $brands = Brand::paginate(15);
         return view('admin.brands.index',[
-          'brands'->$brands
+          'brands'=>$brands
         ]);
     }
 
@@ -28,7 +28,9 @@ class BrandsController extends Controller
      */
     public function create()
     {
-        //
+      return view('admin.brands.create', [
+          'brand' => new Brand,
+      ]);
     }
 
     /**
@@ -52,7 +54,7 @@ class BrandsController extends Controller
     {
         $brand = Brand::find($id);
         return view('admin.brands.show',[
-          'brand'->$brand
+          'brand'=>$brand
         ]);
     }
 
@@ -64,7 +66,11 @@ class BrandsController extends Controller
      */
     public function edit($id)
     {
-        //
+      $brand = Brand::findOrFail($id);
+
+      return view('admin.brand.edit', [
+          'brand' => $brand,
+      ]);
     }
 
     /**
@@ -76,7 +82,11 @@ class BrandsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $brand = Brand::find($id);
+
+      $brand->update($request->all());
+
+      return redirect('/admin/brand/' . $brand->id);
     }
 
     /**
@@ -89,6 +99,6 @@ class BrandsController extends Controller
     {
       $brand = Product::findOrFail($id);
       $brand->delete();
-      return redirect('/brands');
+      return redirect('/admin/brands');
     }
 }

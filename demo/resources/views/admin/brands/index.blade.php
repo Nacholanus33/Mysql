@@ -5,6 +5,13 @@
     <title></title>
   </head>
   <body>
-    Hola
+<ul>
+  @foreach ($brands as $brand)
+    <li>
+      {{$brand->name}} <a href="/brands/{{$brand->id}}">ir</a>
+    </li>
+  @endforeach
+</ul>
+
   </body>
 </html>

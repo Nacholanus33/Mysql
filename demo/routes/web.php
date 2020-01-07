@@ -15,7 +15,12 @@ Route::get('/', function () {
     return view('index');
 });
 Route::get('/products', 'ProductsController@index');
+Route::get('/products/create', 'ProductsController@create');
+Route::post('/products', 'ProductsController@store');
 Route::get('/products/{id}', 'ProductsController@show');
+Route::put('/products/{id}', 'ProductsController@edit');
+Route::delete('/products/{id}', 'ProductsController@destroy');
+
 Route::get('/login', function () {
     return view('login');
 });
@@ -52,3 +57,8 @@ Route::get('/admin/productos/add', function () {
 Route::get('/brand', function () {
     return view('brand');
 });
+Route::get('/admin/brands/index', 'BrandsController@index');
+Route::get('/admin/brands/create','BrandsController@create');
+Route::get('/admin/brands/{id}', 'BrandsController@show');
+Route::post('/admin/brands/{id}','BrandsController@edit');
+Route::delete('/admin/brands/{id}','BrandsController@destroy');

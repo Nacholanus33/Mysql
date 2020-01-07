@@ -28,7 +28,9 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create')
+        return view('admin.products.create', [
+          'product'=>new Product
+        ]);
     }
 
     /**
@@ -39,11 +41,17 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        Product::create($request->all());
+      $this->validate($request,[
+        'name'=>'required',
+        'description'=>'required',
+        'price'=>'required',
+        'categories_id'=>'required|exists'
+      ])
 
       //  return redirect('/products)';
       //  return redirect()->back();
-        return redirect('/products/' . $product->id)
+      $product=Product::create($request->all());
+        return redirect('/products/' . $product->id);
     }
 
     /**

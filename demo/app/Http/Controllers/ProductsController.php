@@ -46,7 +46,7 @@ class ProductsController extends Controller
         'description'=>'required',
         'price'=>'required',
         'categories_id'=>'required|exists'
-      ])
+      ]);
 
       //  return redirect('/products)';
       //  return redirect()->back();

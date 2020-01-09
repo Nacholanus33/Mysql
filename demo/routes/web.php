@@ -62,3 +62,7 @@ Route::get('/admin/brands/create','BrandsController@create');
 Route::get('/admin/brands/{id}', 'BrandsController@show');
 Route::post('/admin/brands/{id}','BrandsController@edit');
 Route::delete('/admin/brands/{id}','BrandsController@destroy');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

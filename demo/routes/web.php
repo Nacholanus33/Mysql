@@ -14,12 +14,14 @@
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/products', 'ProductsController@index');
-Route::get('/products/create', 'ProductsController@create');
-Route::post('/products', 'ProductsController@store');
-Route::get('/products/{id}', 'ProductsController@show');
-Route::put('/products/{id}', 'ProductsController@edit');
-Route::delete('/products/{id}', 'ProductsController@destroy');
+Route::group(['middleware' => 'cart'], function(){
+  Route::get('/products', 'ProductsController@index');
+  Route::get('/products/create', 'ProductsController@create');
+  Route::post('/products', 'ProductsController@store');
+  Route::get('/products/{id}', 'ProductsController@show');
+  Route::patch('/products/{id}', 'ProductsController@edit');
+  Route::delete('/products/{id}', 'ProductsController@destroy');
+});
 
 Route::get('/login', function () {
     return view('login');
@@ -57,10 +59,12 @@ Route::get('/admin/productos/add', function () {
 Route::get('/brand', function () {
     return view('brand');
 });
-Route::get('/admin/brands/index', 'BrandsController@index');
+Route::get('/admin/brands/', 'BrandsController@index');
 Route::get('/admin/brands/create','BrandsController@create');
+Route::post('/admin/brands/', 'BrandsController@store');
 Route::get('/admin/brands/{id}', 'BrandsController@show');
 Route::post('/admin/brands/{id}','BrandsController@edit');
+Route::patch('/admin/brands/{id}','BrandsController@update');
 Route::delete('/admin/brands/{id}','BrandsController@destroy');
 
 Auth::routes();

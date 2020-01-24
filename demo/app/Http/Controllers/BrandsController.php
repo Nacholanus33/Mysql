@@ -41,7 +41,12 @@ class BrandsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $this->validate($request,[
+        'name'=>'required',
+      ]);
+
+      $brand=Brand::create($request->all());
+        return redirect('/admin/brands/' . $brand->id);
     }
 
     /**
@@ -68,7 +73,7 @@ class BrandsController extends Controller
     {
       $brand = Brand::findOrFail($id);
 
-      return view('admin.brand.edit', [
+      return view('admin.brands.edit', [
           'brand' => $brand,
       ]);
     }
@@ -86,7 +91,7 @@ class BrandsController extends Controller
 
       $brand->update($request->all());
 
-      return redirect('/admin/brand/' . $brand->id);
+      return redirect('/admin/brands/' . $brand->id);
     }
 
     /**
@@ -97,7 +102,7 @@ class BrandsController extends Controller
      */
     public function destroy($id)
     {
-      $brand = Product::findOrFail($id);
+      $brand = Brand::findOrFail($id);
       $brand->delete();
       return redirect('/admin/brands');
     }

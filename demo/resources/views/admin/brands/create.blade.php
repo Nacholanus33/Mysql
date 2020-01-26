@@ -1,6 +1,12 @@
-<h1>Crear Marca</h1>
+@extends('layouts.admin')
+@section('title',"Create")
+@section('script',asset("js/create.js"))
+@section('content')
 
-@include('admin.brands.form', [
-    'method' => 'post',
-    'url' => '/admin/brands',
-])
+  <h1>Crear Marca</h1>
+
+  @include('admin.brands.form', [
+      'method' => 'post',
+      'url' => '/admin/brands',
+  ])
+@endsection

@@ -1,0 +1,19 @@
+.agregar{
+  color:black;
+  padding: 0px;
+}
+.marca{
+  text-align: center;
+}
+.sinpadding{
+  padding: 0px;
+}
+li{
+  width:100%;
+}
+.red{
+  background-color: red;
+}
+.yellow{
+  background-color: yellow;
+}
